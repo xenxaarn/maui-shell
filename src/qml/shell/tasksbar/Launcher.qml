@@ -45,8 +45,8 @@ Maui.Page
         property var app : ({})
 
         title: app.label
-        subtitle: app.comment
-        titleIconSource: app.icon
+         Maui.Controls.subtitle: app.comment
+         Maui.Controls.iconName: app.icon
 
         MenuItem
         {
@@ -357,7 +357,7 @@ Maui.Page
                         list: _allAppsModel
                     }
 
-                    onKeyPress:
+                    Keys.onPressed: (event) =>
                     {
                         console.log("Key _pressed", event.key, _gridView.model.get(_gridView.currentIndex).executable)
                         if(event.key == Qt.Key_Return)

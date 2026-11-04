@@ -267,7 +267,6 @@ int main(int argc, char *argv[])
            //    });
 
 
-    QQuickStyle::setStyle(QStringLiteral("QtQuick.Controls.Maui"));
 
     caskExecutablePath = app.applicationFilePath().toLocal8Bit();
     caskPID = QCoreApplication::applicationPid();

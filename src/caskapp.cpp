@@ -187,6 +187,8 @@ void CaskApp::startup()
     qputenv("MOZ_ENABLE_WAYLAND", "1");
 
            // Load the compositor
+   if (m_windowed && qEnvironmentVariableIsSet("WAYLAND_DISPLAY"))
+    qputenv("WAYLAND_DISPLAY", "wayland-cask");
     m_appEngine->load(m_url);
 
     m_started = true;
