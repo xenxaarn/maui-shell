@@ -293,7 +293,11 @@ WaylandOutput
 
                         function forceActiveFocus()
                         {
-                            _zpaceDelegate.zpace.windows.currentWindow.activate()
+                          if (_zpaceDelegate.zpace &&
+                              _zpaceDelegate.zpace.windows &&
+                              _zpaceDelegate.zpace.windows.currentWindow) {
+                              _zpaceDelegate.zpace.windows.currentWindow.activate()
+                          }
                         }
                     }
                 }

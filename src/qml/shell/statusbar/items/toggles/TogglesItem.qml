@@ -44,8 +44,7 @@ Cask.PanelItem
 
     card: Cask.PanelCard
     {
-        width: parent.width
-
+        width: parent ? parent.width : implicitWidth
         onClosed: _togglesStack.pop()
 
         StackView

@@ -125,8 +125,7 @@ Cask.StackableItem
         opacity: moving || pinch4.activeScale <= 0.5 ? 0.5 : 1.0
 
         inputEventsEnabled: !rootChrome.overviewMode
-        touchEventsEnabled: !pinch3.active && !pinch4.active
-
+        touchEventsEnabled: !pinch4.active
         focusOnClick:  !altDragHandler.active && !rootChrome.overviewMode
         autoCreatePopupItems: true
 
@@ -317,8 +316,8 @@ Cask.StackableItem
             // rootChrome.x = 0
             // rootChrome.y = 0
 
-            // rootChrome.moveItem.x =  0
-            // rootChrome.moveItem.y =  0
+            rootChrome.moveItem.x =  0
+            rootChrome.moveItem.y =  0
 
             toplevel.sendMaximized(Qt.size(rootChrome.parent.width, rootChrome.parent.height - rootChrome.titlebarHeight))
         }
@@ -393,7 +392,7 @@ Cask.StackableItem
     Rectangle
     {
         z: surfaceItem.z + 9999999999
-        visible: true
+        visible: false
         border.color: "white"
         color: "black"
         radius: Maui.Style.radiusV
