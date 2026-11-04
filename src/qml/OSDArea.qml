@@ -60,7 +60,7 @@ Container
             Maui.Theme.colorSet: Maui.Theme.Complementary
             padding: Maui.Style.space.medium
 
-            height: implicitContentHeight+topPadding+bottomPadding
+            height: (contentItem ? contentItem.implicitHeight : 0)+topPadding+bottomPadding
             width: 300
 
             hoverEnabled: true

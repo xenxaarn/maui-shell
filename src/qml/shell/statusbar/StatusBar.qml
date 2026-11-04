@@ -28,7 +28,7 @@ Control
     Layout.fillWidth: true
     //    Layout.margins: floating ? Maui.Style.space.tiny : 0
 
-    implicitHeight: implicitContentHeight + topPadding + bottomPadding
+    implicitHeight: (contentItem ? contentItem.implicitHeight : 0) + topPadding + bottomPadding
 
     spacing: padding
     padding: !floating ? 0 : Maui.Style.space.medium

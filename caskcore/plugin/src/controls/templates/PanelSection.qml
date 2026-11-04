@@ -32,8 +32,8 @@ Control
     leftPadding: padding
     rightPadding: padding
 
-    implicitWidth: implicitContentWidth + leftPadding + rightPadding
-    implicitHeight: implicitContentHeight + topPadding + bottomPadding
+    implicitWidth: (contentItem ? contentItem.implicitWidth : 0) + leftPadding + rightPadding
+    implicitHeight: (contentItem ? contentItem.implicitHeight : 0) + topPadding + bottomPadding
 
     Behavior on implicitWidth
     {
