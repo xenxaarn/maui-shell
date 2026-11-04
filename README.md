@@ -1,8 +1,6 @@
 # Maui Shell
 
-![](https://mauikit.org/wp-content/uploads/2018/12/maui_project_logo.png)
-
-[![Maui Shell AppImage](https://github.com/Nitrux/maui-shell/actions/workflows/build-appimage-amd64.yml/badge.svg)](https://github.com/Nitrux/maui-shell/actions/workflows/build-appimage-amd64.yml) [![License: LGPL v3](https://img.shields.io/badge/License-LGPL%20v3-blue.svg)](https://www.gnu.org/licenses/lgpl-3.0) [![Awesome](https://awesome.re/badge.svg)](https://awesome.re) [![Generic badge](https://img.shields.io/badge/OS-Linux-blue.svg)](https://shields.io/)
+[![License: LGPL v3](https://img.shields.io/badge/License-LGPL%20v3-blue.svg)](https://www.gnu.org/licenses/lgpl-3.0) [![Awesome](https://awesome.re/badge.svg)](https://awesome.re) [![Generic badge](https://img.shields.io/badge/OS-Linux-blue.svg)](https://shields.io/)
 
 _Maui Shell is a convergent shell for desktops, tablets, and phones._
 
@@ -17,15 +15,20 @@ Maui Shell is composed of two parts:
 ![screenshot_2](https://nxos.org/wp-content/uploads/2021/12/promo-8-scaled.jpg "Tablet Mode")
 ![screenshot_3](https://nxos.org/wp-content/uploads/2021/12/promo-6.jpg "Phone Mode")
 
-# Download
-
- Maui Shell is available as an AppImage. Click the button below to download it or head over to the _Releases_ tab.
-
- [![appimage-button](https://github.com/UriHerrera/appimage-buttons/blob/main/buttons/appimage-btn-dark.svg)](https://github.com/Nitrux/maui-shell/releases)
 
 # Build
-
-Please check the [Wiki](https://github.com/Nitrux/maui-shell/wiki) for build instructions.
+Clone :
+```bash
+https://github.com/xenxaarn/maui-shell.git
+```
+Run :
+```bash
+./install-build-deps.sh
+```
+Run all build scripts  :
+```bash
+./deploy-all.sh
+```
 
 # Running
 
@@ -45,10 +48,8 @@ Cask does not include an embedded X server yet, but it might be possible.
 
 # Contributing
 
-If you'd like to contribute to this project, please make a PR. You can also ask for help at the [KDE Maui project Telegram](https://t.me/mauiproject) channel.
+If you'd like to contribute to this project, please make a PR. 
 
 # Issues
 
 If you find problems with the contents of this repository please create an issue.
-
-©2022 Nitrux Latinoamericana S.C.
