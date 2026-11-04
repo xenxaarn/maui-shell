@@ -85,7 +85,7 @@ WaylandCompositor
     XdgShell
     {
         // void toplevelCreated(QWaylandXdgToplevel *toplevel, QWaylandXdgSurface *xdgSurface);
-        onToplevelCreated: handleShellSurfaceCreated(xdgSurface, toplevel)
+        onToplevelCreated: (toplevel, xdgSurface) => handleShellSurfaceCreated(xdgSurface, toplevel)
     }
 
     XdgDecorationManagerV1

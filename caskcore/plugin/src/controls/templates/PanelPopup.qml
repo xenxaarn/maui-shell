@@ -48,13 +48,13 @@ Container
         propagateComposedEvents: !control.displayOverlay
         preventStealing: control.displayOverlay
 
-        onClicked:
+        onClicked: (mouse) =>
         {
             control.overlayClicked()
             mouse.accepted = true
         }
 
-        onPressed:
+        onPressed: (mouse) =>
         {
             if(!control.displayOverlay)
             {
