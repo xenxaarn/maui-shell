@@ -25,7 +25,7 @@ WaylandCompositor
         id: screen
         compositor: comp
 //        targetScreen: modelData
-        position: Qt.point(virtualX, virtualY)
+        position: Qt.point(0, 0)
 
         Component.onCompleted:
         {

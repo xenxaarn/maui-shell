@@ -223,7 +223,7 @@ Item
                 {
                     id: _dockHoverHandler
                     enabled: !handler.active && control.hidden
-                    acceptedPointerTypes: PointerDevice.GenericPointer
+                    acceptedPointerTypes: PointerDevice.Generic
                     onHoveredChanged:
                     {
                         _dockRevealTimer.restart()

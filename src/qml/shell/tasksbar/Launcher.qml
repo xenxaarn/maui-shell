@@ -44,9 +44,9 @@ Maui.Page
         id: _appMenu
         property var app : ({})
 
-        title: app.label
-         Maui.Controls.subtitle: app.comment
-         Maui.Controls.iconName: app.icon
+        title: app.label || ""
+         Maui.Controls.subtitle: app.comment || ""
+         Maui.Controls.iconName: app.icon || ""
 
         MenuItem
         {

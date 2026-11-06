@@ -9,7 +9,7 @@ Cask.PanelItem
 {
     id: control
     property var mprisSourcesModel: []
-    readonly property bool isPlaying : _playersList.currentItem.item.isPlaying
+    readonly property bool isPlaying : _playersList.currentItem && _playersList.currentItem.item ? _playersList.currentItem.item.isPlaying : false
 
 
     Cask.IconLabel
@@ -22,7 +22,7 @@ Cask.PanelItem
     Cask.IconLabel
     {
         visible: labelsVisible
-        text: _playersList.currentItem.item.track
+        text: _playersList.currentItem && _playersList.currentItem.item ? _playersList.currentItem.item.track : ""
         width: Math.min(implicitWidth, 200)
         icon.source: "headphones"
         height: control.iconSize

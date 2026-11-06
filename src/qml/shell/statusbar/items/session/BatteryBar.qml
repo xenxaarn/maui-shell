@@ -18,11 +18,11 @@ AbstractBarToggle
     {
         id: _bar
         Layout.fillWidth: true
-        color: control.batteryColor(control.battery.stateName)
+        color: control.batteryColor(control.battery ? control.battery.stateName : "")
 
         from: 1
         to : 100
-        value : control.battery.percent
+        value : control.battery ? control.battery.percent : 0
     }
 
     function batteryColor(state)

@@ -67,7 +67,7 @@ Cask.PanelItem
             label2.text: i18np("Are you sure you want to quit the session?", "Are you sure you want to quit the session and terminate runnig tasks?", _runningTasks.count+1);
     label2.wrapMode: TextEdit.WordWrap
 
-            iconSource: switch(operation)
+            iconSource: switch(_sessioDialog.operation)
                                  {
                                  case Cask.Power.Logout: return i18n("system-log-out");
                                  case Cask.Power.Reboot: return i18n("system-reboot");
@@ -172,7 +172,7 @@ Cask.PanelItem
                 RowLayout
                 {
                     width: parent.width
-                    property int display: ToolButton.OnlyIcon
+                    property int display: ToolButton.IconOnly
                     spacing: Maui.Style.space.medium
 
                     SessionButton
