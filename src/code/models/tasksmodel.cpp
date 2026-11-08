@@ -36,10 +36,13 @@ int TasksModel::rowCount(const QModelIndex &parent) const
 
 QVariant TasksModel::data(const QModelIndex &index, int role) const
 {
-    if (!index.isValid())
+    if (!index.isValid() || index.row() < 0 || index.row() >= m_tasks.count())
         return QVariant();
 
     auto task = m_tasks[index.row()];
+    if (!task)
+        return QVariant();
+
     auto window = task->window();
 
     qDebug() << "Askign for taksbar mdoel data" << role;
@@ -64,6 +67,9 @@ QHash<int, QByteArray> TasksModel::roleNames() const
 
 void TasksModel::addTask(AbstractWindow *window)
 {
+    if(!window)
+        return;
+
     qDebug() << "trying to insert a task" << window << window->appId();
 
     //here needs to find if the window appid belongs to an existing task.
@@ -155,6 +161,7 @@ void TasksModel::addTask(Task *task)
     if(!task)
     {
         qWarning() << "Task is nullptr and can not be added to the TaskModel";
+        return;
     }
 
     const auto index = m_tasks.size();
