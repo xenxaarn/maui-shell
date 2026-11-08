@@ -58,7 +58,22 @@ void Task::setId(const QString &id)
 
 QString Task::name() const
 {
-    return QString();
+    if (!m_name.isEmpty()) {
+        return m_name;
+    }
+
+    if (m_window) {
+        const auto title = m_window->title();
+        if (!title.isEmpty()) {
+            return title;
+        }
+    }
+
+    if (!m_fileName.isEmpty()) {
+        return m_fileName;
+    }
+
+    return m_id;
 }
 
 QString Task::iconName() const
