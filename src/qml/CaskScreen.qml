@@ -44,7 +44,7 @@ WaylandOutput
 
     readonly property alias formFactor : win.formFactor
 
-    readonly property bool isMobile : formFactor === Cask.Env.Phone
+    readonly property bool isMobile : formFactor === Cask.MauiMan.Phone
 
     //Orientations values
     //Qt.PortraitOrientation => 1
