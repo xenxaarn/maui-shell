@@ -165,7 +165,7 @@ void qtMsgLog(QtMsgType type, const QMessageLogContext &context, const QString &
 
 static qreal highestDPR(QList<QScreen *> screens)
 {
-    qreal ret = 0;
+    qreal ret = 1.0;
     for (const QScreen *scr : screens) {
         qDebug() << "Screen" << scr->name() << scr->geometry() << scr->physicalSize()
                  << "DPI: log" << scr->logicalDotsPerInch() << "phys" << scr->physicalDotsPerInch()
