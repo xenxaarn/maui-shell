@@ -150,10 +150,16 @@ void Task::setIsPinned(bool isPinned)
 
 void Task::setWindowConnections()
 {
+    for(const auto &connection : m_windowConnections)
+    {
+        QObject::disconnect(connection);
+    }
+    m_windowConnections.clear();
+
     if(!m_window)
         return;
 
-    connect(m_window, &AbstractWindow::closed, this, [this]()
+    m_windowConnections.append(connect(m_window, &AbstractWindow::closed, this, [this]()
     {
         if(m_isPinned)
         {
@@ -164,13 +170,13 @@ void Task::setWindowConnections()
             Q_EMIT this->closed();
         }
 
-    }, Qt::QueuedConnection);
+    }, Qt::QueuedConnection));
 
 
-    connect(m_window, &AbstractWindow::appIdChanged, [this]()
+    m_windowConnections.append(connect(m_window, &AbstractWindow::appIdChanged, this, [this]()
     {
         this->setId(m_window->appId());
-    });
+    }));
 }
 
 void Task::setData()
