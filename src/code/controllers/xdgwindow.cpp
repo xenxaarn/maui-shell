@@ -108,6 +108,9 @@ void XdgWindow::activate()
 
 void XdgWindow::close()
 {
+    if(!m_toplevel)
+        return;
+
     m_toplevel->sendClose();
 }
 
