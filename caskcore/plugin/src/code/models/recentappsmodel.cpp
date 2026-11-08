@@ -12,6 +12,7 @@ RecentAppsModel::RecentAppsModel(AppsDB * parent) : QAbstractListModel(parent)
 void RecentAppsModel::setList(const QVariantList &list)
 {
     beginResetModel();
+    m_list.clear();
     for(const auto &item : list)
     {
         m_list << AppsDB::appInfo(item.toMap().value(QStringLiteral("name")).toString());
