@@ -51,7 +51,7 @@ WaylandCompositor
 
         function onAuthenticationRequest(dialog)
         {
-            var popup2 = _polkitDialogComponent.createObject(comp.defaultOutput.window, {"parent" : comp.defaultOutput.window, "dialog": dialog});
+            var popup2 = _polkitDialogComponent.createObject(comp.defaultOutput.window.contentItem, {"parent" : comp.defaultOutput.window.contentItem, "dialog": dialog});
             popup2.open()
         }
     }
