@@ -1,10 +1,10 @@
 #include "task.h"
 #include "code/controllers/abstractwindow.h"
+#include "code/controllers/desktoputils.h"
 #include "code/models/tasksmodel.h"
 
-#include <KDesktopFile>
-#include <KService>
 #include <QSettings>
+#include <QDebug>
 
 Task::Task(const QString &id, AbstractWindow *window, TasksModel *modelRoot) : QObject(nullptr)
   ,m_id(id)
@@ -185,18 +185,16 @@ void Task::setData()
     {
         return;
     }
-    QString suffix;
-    if(!m_id.endsWith(QStringLiteral(".desktop")))
-    {
-        suffix = QStringLiteral(".desktop");
-    }
-    KDesktopFile file(m_id+suffix);
-    this->setIconName(file.readIcon());
-    this->setName(file.readName());
-    this->setFileName(file.fileName());
-    KService service(&file);
-    this->setPath(service.entryPath());
-    this->setExecutable(service.exec());
+
+    const auto service = DesktopUtils::serviceForId(m_id);
+    if(!service)
+        return;
+
+    this->setIconName(service->icon());
+    this->setName(service->name());
+    this->setFileName(service->entryPath());
+    this->setPath(service->entryPath());
+    this->setExecutable(service->exec());
 }
 
 void Task::setFileName(const QString &name)

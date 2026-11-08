@@ -1,7 +1,6 @@
 #include "xdgwindow.h"
+#include "desktoputils.h"
 #include <QDebug>
-
-#include <KDesktopFile>
 
 #include <QWaylandSurface>
 
@@ -51,6 +50,12 @@ void XdgWindow::setShellSurface(QWaylandShellSurface *shellSurface)
     m_shellSurface = shellSurface;
 
     m_xdgSurface = qobject_cast<QWaylandXdgSurface*>(shellSurface);
+    if (!m_xdgSurface)
+    {
+        qWarning() << "XdgWindow requires an XDG shell surface";
+        return;
+    }
+
     Q_EMIT this->xdgSurfaceChanged();
 
     m_waylandSurface = m_xdgSurface->surface();
@@ -71,11 +76,13 @@ void XdgWindow::setToplevel(QWaylandXdgToplevel *toplevel)
     if (m_toplevel == toplevel)
         return;
 
-//    if(m_toplevel)
-//        m_toplevel->deleteLater();
+    if (m_toplevel)
+        disconnect(m_toplevel, nullptr, this, nullptr);
 
     m_toplevel = toplevel;
     qDebug() << "SETTIGN WINDOW TOPLEVEL" << toplevel << m_toplevel;
+
+    setUpToplevelConnections();
 
     Q_EMIT toplevelChanged(m_toplevel);
 }
@@ -146,7 +153,7 @@ void XdgWindow::setUpToplevelConnections()
 
     connect(m_toplevel, &QWaylandXdgToplevel::titleChanged, this, &AbstractWindow::titleChanged);
 
-    connect(m_toplevel, &QWaylandXdgToplevel::appIdChanged, [this]()
+    connect(m_toplevel, &QWaylandXdgToplevel::appIdChanged, this, [this]()
     {
         qDebug() << "tolevel appid changed" << this->appId();
         Q_EMIT this->appIdChanged();
@@ -154,7 +161,7 @@ void XdgWindow::setUpToplevelConnections()
         Q_EMIT this->iconNameChanged();
     });
 
-    connect(m_toplevel, &QWaylandXdgToplevel::activatedChanged, [this]()
+    connect(m_toplevel, &QWaylandXdgToplevel::activatedChanged, this, [this]()
     {
        this->setIsActive(m_toplevel->activated());
     });
@@ -190,8 +197,8 @@ QString XdgWindow::iconName() const
     if(!m_toplevel)
         return QString();
 
-    KDesktopFile file(this->appId() + QStringLiteral(".desktop"));
-    return file.readIcon();
+    const auto service = DesktopUtils::serviceForId(this->appId());
+    return service ? service->icon() : QString();
 }
 
 QString XdgWindow::appName() const
@@ -199,8 +206,8 @@ QString XdgWindow::appName() const
     if(!m_toplevel)
         return QString();
 
-    KDesktopFile file(this->appId() + QStringLiteral(".desktop"));
-    return file.readName();
+    const auto service = DesktopUtils::serviceForId(this->appId());
+    return service ? service->name() : this->appId();
 }
 
 QWaylandXdgSurface *XdgWindow::xdgSurface() const
