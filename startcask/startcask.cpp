@@ -565,8 +565,8 @@ bool startCaskSession()
 
 
     QScopedPointer<QProcess> startCaskSession;
-    auto power = std::make_unique<CaskPower*>(new CaskPower);
-    QObject::connect(*power, &CaskPower::logoutRequested, [&]()
+    auto power = std::make_unique<CaskPower>();
+    QObject::connect(power.get(), &CaskPower::logoutRequested, [&]()
     {
         qDebug() << "(1) REQUEST TO QUIT SESSION";
         startCaskSession.data()->terminate();
