@@ -155,7 +155,7 @@ void sourceFiles(const QStringList &files)
     if (filteredFiles.isEmpty())
         return;
 
-    filteredFiles.prepend(QStringLiteral(CMAKE_INSTALL_FULL_LIBEXECDIR "/plasma-sourceenv.sh"));
+    filteredFiles.prepend(QStringLiteral(CMAKE_INSTALL_FULL_LIBEXECDIR "/cask-sourceenv.sh"));
 
     QProcess p;
     p.start(QStringLiteral("/bin/sh"), filteredFiles);
