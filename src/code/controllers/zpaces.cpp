@@ -54,20 +54,31 @@ SurfacesModel *Zpaces::allSurfaces() const
 
 int Zpaces::addWindow(AbstractWindow *window, const int &fromIndex)
 {
+    if(!window)
+        return -1;
+
     qDebug() << "trying to add window" << window;
-    window->setParent(nullptr); //parent the window to nullptr. windows are destroyed when closed or by the SurfacesModel itself. SurfacesModel takes care of cleaning up remanining windows on destruction, same TasksModel.
+    window->setParent(nullptr); // windows are unparented; XdgWindow deletes itself when its Wayland surface is destroyed
 
     //add window to allSurfacesModel
     m_allSurfaces->addWindow(window);
 
-    QMetaObject::Connection * const winConnection = new QMetaObject::Connection;
-    *winConnection = connect(window, &AbstractWindow::appIdChanged, [this, winConnection, window]()
+    connect(window, &AbstractWindow::closed, this, [this, window]()
     {
-        m_tasksModel->addTask(window);
-        QObject::disconnect(*winConnection);
-        delete winConnection;
+        this->removeWindow(window);
     });
 
+    if(!window->appId().isEmpty())
+    {
+        m_tasksModel->addTask(window);
+    }else
+    {
+        connect(window, &AbstractWindow::appIdChanged, this, [this, window]()
+        {
+            if(!window->appId().isEmpty())
+                m_tasksModel->addTask(window);
+        }, Qt::SingleShotConnection);
+    }
 
     for(int i = fromIndex ; i < m_zpacesModel->count(); i++)
     {
@@ -86,6 +97,22 @@ int Zpaces::addWindow(AbstractWindow *window, const int &fromIndex)
     //    dynamic_cast<XdgWindow*>(window)->toplevel()->sendFullscreen(){m_output->availableGeometry().width(), m_output->availableGeometry().height()});
 
     return m_zpacesModel->count()-1;
+}
+
+void Zpaces::removeWindow(AbstractWindow *window)
+{
+    if(!window)
+        return;
+
+    m_allSurfaces->popWindow(window);
+
+    for(const auto &zpace : m_zpacesModel->zpaces())
+    {
+        if(zpace->windows()->windowExists(window))
+            zpace->popWindow(window);
+    }
+
+    m_tasksModel->removeTaskForWindow(window);
 }
 
 int Zpaces::moveWindow(AbstractWindow *window, Zpace *fromZpace, Zpace *toZpace)

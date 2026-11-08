@@ -107,9 +107,34 @@ void TasksModel::removeTask(const int &index)
         return;
 
     this->beginRemoveRows(QModelIndex(), index, index);
-    m_tasks.remove(index);
+    Task *task = m_tasks.takeAt(index);
     this->endRemoveRows();
+
+    if(task)
+        task->deleteLater();
+
     Q_EMIT this->countChanged();
+}
+
+void TasksModel::removeTaskForWindow(AbstractWindow *window)
+{
+    if(!window)
+        return;
+
+    for(int i = m_tasks.size() - 1; i >= 0; --i)
+    {
+        Task *task = m_tasks.at(i);
+        if(!task || task->window() != window)
+            continue;
+
+        if(task->isPinned())
+        {
+            task->setWindow(nullptr);
+        }else
+        {
+            this->removeTask(i);
+        }
+    }
 }
 
 QStringList TasksModel::pinnedTasks()
