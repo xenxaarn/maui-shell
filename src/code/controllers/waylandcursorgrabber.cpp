@@ -108,7 +108,7 @@ void WaylandCursorGrabber::handleCursorSurfaceRequest(QWaylandSurface *cursorSur
         Q_EMIT hotspotXChanged(hotspotX);
     }
 
-    if (m_hotspotY == hotspotY) {
+    if (m_hotspotY != hotspotY) {
         m_hotspotY = hotspotY;
         Q_EMIT hotspotYChanged(hotspotY);
     }
@@ -185,7 +185,8 @@ void WaylandCursorGrabber::handleGrab(const QImage &image)
     if (m_grab) {
         qDebug() << "HANDLE DRAG IMAGE" << m_grab;
 
-        QCursor cursor(QPixmap::fromImage(image), m_hotspotX, m_hotspotY);
+        const int scale = surface() ? surface()->bufferScale() : 1;
+        QCursor cursor(QPixmap::fromImage(image), m_hotspotX * scale, m_hotspotY * scale);
         output()->window()->setCursor(cursor);
     }
 
