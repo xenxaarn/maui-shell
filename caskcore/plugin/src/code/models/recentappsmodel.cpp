@@ -23,8 +23,10 @@ void RecentAppsModel::setList(const QVariantList &list)
 
 void RecentAppsModel::insert(const QString &desktopFile, const int &index)
 {
-    beginInsertRows(QModelIndex(), index, index);
-    m_list.insert(index, AppsDB::appInfo(desktopFile));
+    const int row = qBound(0, index, m_list.size());
+
+    beginInsertRows(QModelIndex(), row, row);
+    m_list.insert(row, AppsDB::appInfo(desktopFile));
     endInsertRows();
 }
 
@@ -40,7 +42,7 @@ int RecentAppsModel::rowCount(const QModelIndex &parent) const
 
 QVariant RecentAppsModel::data(const QModelIndex &index, int role) const
 {
-    if (!index.isValid())
+    if (!index.isValid() || index.row() < 0 || index.row() >= m_list.size())
         return QVariant();
 
     auto map = m_list.at(index.row()).toMap();
