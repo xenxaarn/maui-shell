@@ -39,6 +39,8 @@ WaylandCompositor
         id: _notifications
     }
 
+    Binding { target: Shell; property: "notifications"; value: _notifications }
+
     Component
     {
         id: _polkitDialogComponent

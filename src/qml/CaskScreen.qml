@@ -88,6 +88,25 @@ WaylandOutput
     property bool isNestedCompositor: Qt.platform.pluginName.startsWith("wayland") || Qt.platform.pluginName === "xcb"
     property bool showDesktop : true
 
+    // Shell-wide state shared with the components loaded from other QML files.
+    Binding { target: Shell; property: "win"; value: win }
+    Binding { target: Shell; property: "formFactor"; value: win.formFactor }
+    Binding { target: Shell; property: "isMobile"; value: control.isMobile }
+    Binding { target: Shell; property: "availableGeometry"; value: control.availableGeometry }
+    Binding { target: Shell; property: "zpaces"; value: _zpaces }
+    Binding { target: Shell; property: "cask"; value: _cask }
+    Binding { target: Shell; property: "dock"; value: _dock }
+    Binding { target: Shell; property: "workspaces"; value: _swipeView }
+    Binding { target: Shell; property: "screenshot"; value: _screenshotArea }
+    Binding { target: Shell; property: "appsDB"; value: _appsDB }
+    Binding { target: Shell; property: "screen"; value: control }
+    Binding { target: Shell; property: "appsOverview"; value: _appsOverview }
+
+    Cask.AppsDB
+    {
+        id: _appsDB
+    }
+
     sizeFollowsWindow: true
     availableGeometry : _swipeView.currentItem.availableGeometry
 

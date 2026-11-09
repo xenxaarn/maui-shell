@@ -23,11 +23,6 @@ Item
 
     property alias launcher : _launcher
 
-    Cask.AppsDB
-    {
-        id: _appsDB
-    }
-
     Rectangle
     {
         id: overlay
