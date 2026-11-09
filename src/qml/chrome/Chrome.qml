@@ -37,28 +37,31 @@ Cask.StackableItem
     objectName: "Chrome"
 
     //Check if an activated surface overlaps the dock
-    readonly property bool intersects : toplevel ? (y+height > rootChrome.parent.height+20 || formFactor !== Cask.MauiMan.Desktop) && activated : false
+    readonly property bool intersects : toplevel ? (y+height > rootChrome.parent.height+20 || Shell.formFactor !== Cask.MauiMan.Desktop) && activated : false
 
     property alias shellSurface: surfaceItem.shellSurface
 
     property bool overviewMode : false
 
     property ZP.XdgWindow window
-    property XdgSurface xdgSurface: window.xdgSurface
-    property XdgToplevel toplevel: window.toplevel
-    property WaylandSurface surface: xdgSurface.surface
-    property WaylandSurface parentSurface: toplevel.parentToplevel.xdgSurface.surface
+    property XdgSurface xdgSurface: window ? window.xdgSurface : null
+    property XdgToplevel toplevel: window ? window.toplevel : null
+    property WaylandSurface surface: xdgSurface ? xdgSurface.surface : null
+    property WaylandSurface parentSurface: toplevel && toplevel.parentToplevel ? toplevel.parentToplevel.xdgSurface.surface : null
 
-    readonly property string appId: window.appId
-    readonly property string title: window.title
+    // The Zpace delegate this chrome lives in, used to focus another window.
+    property var zpaceItem
 
-    readonly property bool activated : toplevel.activated
-    property bool resizing : toplevel.resizing
-    readonly property bool fullscreen : toplevel.fullscreen
+    readonly property string appId: window ? window.appId : ""
+    readonly property string title: window ? window.title : ""
+
+    readonly property bool activated : toplevel ? toplevel.activated : false
+    property bool resizing : toplevel ? toplevel.resizing : false
+    readonly property bool fullscreen : toplevel ? toplevel.fullscreen : false
 
     property alias moveItem: surfaceItem.moveItem
 
-    readonly property bool decorationVisible: win.formFactor === Cask.MauiMan.Desktop && toplevel.decorationMode === XdgToplevel.ServerSideDecoration
+    readonly property bool decorationVisible: Shell.formFactor === Cask.MauiMan.Desktop && toplevel && toplevel.decorationMode === XdgToplevel.ServerSideDecoration
 
     property bool moving: surfaceItem.moveItem ? surfaceItem.moveItem.moving : false
 
@@ -78,10 +81,13 @@ Cask.StackableItem
 
     onIntersectsChanged:
     {
+        if(!Shell.dock)
+            return
+
         if(intersects)
-            dock.hide()
+            Shell.dock.hide()
         else
-            dock.show()
+            Shell.dock.show()
     }
 
     transform: [
@@ -97,6 +103,9 @@ Cask.StackableItem
     {
         id: _decoration
         anchors.fill: parent
+
+        chrome: rootChrome
+        window: rootChrome.window
 
         showTitleBar: rootChrome.decorationVisible && !rootChrome.fullscreen
         showResizeHandlers: rootChrome.decorationVisible && !rootChrome.fullscreen
@@ -210,7 +219,7 @@ Cask.StackableItem
         sourceComponent: Rectangle
         {
             radius:  _decoration.radius
-            visible: Cask.Server.screenshot.blacklisted.indexOf(rootChrome.appId) >= 0 && _screenshotArea.running
+            visible: Cask.Server.screenshot.blacklisted.indexOf(rootChrome.appId) >= 0 && Shell.screenshot && Shell.screenshot.running
             color: Maui.Theme.backgroundColor
 
             Maui.Holder
@@ -228,21 +237,21 @@ Cask.StackableItem
     {
         asynchronous: true
         anchors.fill: parent
-        active: win.formFactor === Cask.MauiMan.Desktop ? (rootChrome.decorationVisible && !window.maximized && !rootChrome.fullscreen) : (rootChrome.height < availableGeometry.height || rootChrome.width < availableGeometry.width || pinch4.active)
+        active: Shell.formFactor === Cask.MauiMan.Desktop ? (rootChrome.decorationVisible && !window.maximized && !rootChrome.fullscreen) : (rootChrome.height < Shell.availableGeometry.height || rootChrome.width < Shell.availableGeometry.width || pinch4.active)
         z: surfaceItem.z + 9999999999
 
-        sourceComponent: Border {}
+        sourceComponent: Border { decoration: _decoration }
     }
 
     Connections
     {
         target: rootChrome.parent
         ignoreUnknownSignals: true
-        enabled: win.formFactor !== Cask.MauiMan.Desktop
+        enabled: Shell.formFactor !== Cask.MauiMan.Desktop
 
         function onWidthChanged()
         {
-            if(formFactor !== Cask.MauiMan.Desktop)
+            if(Shell.formFactor !== Cask.MauiMan.Desktop)
             {
                 window.maximize()
             }
@@ -250,7 +259,7 @@ Cask.StackableItem
 
         function onHeightChanged()
         {
-            if(formFactor !== Cask.MauiMan.Desktop)
+            if(Shell.formFactor !== Cask.MauiMan.Desktop)
             {
                 window.maximize()
             }
@@ -259,11 +268,11 @@ Cask.StackableItem
 
     Connections
     {
-        target: win
+        target: Shell.win
         ignoreUnknownSignals: true
         function onFormFactorChanged()
         {
-            if(win.formFactor === Cask.MauiMan.Desktop)
+            if(Shell.formFactor === Cask.MauiMan.Desktop)
             {
                 rootChrome.shellSurface.toplevel.sendConfigure(Qt.size(previousRect.width, previousRect.height), [3,4])
                 rootChrome.moveItem.x = previousRect.x
@@ -294,7 +303,8 @@ Cask.StackableItem
         {
             rootChrome.visible = false
             window.deactivate()
-            focusTopWindow(1)
+            if(zpaceItem)
+                zpaceItem.focusTopWindow(1)
         }
 
         function onUnsetMinimized()
