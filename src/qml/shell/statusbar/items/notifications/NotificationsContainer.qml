@@ -33,6 +33,7 @@ Pane
                 timeout: model.timeout
                 urgency: model.urgency
                 actions: model.actions
+                notificationId: model.notificationId
                 onDismissed: Shell.notifications.notificationsModel.close(model.notificationId)
                 onExpired: Shell.notifications.notificationsModel.expired(model.notificationId)
             }

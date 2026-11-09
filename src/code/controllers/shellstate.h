@@ -49,6 +49,7 @@ public:
     QObject *appsOverview() const;
 
 public Q_SLOTS:
+    void invokeNotificationAction(uint notificationId, const QString &action);
     void setWin(QObject *win);
     void setFormFactor(int formFactor);
     void setIsMobile(bool isMobile);
