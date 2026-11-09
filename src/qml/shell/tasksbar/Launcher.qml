@@ -81,7 +81,7 @@ Maui.Page
 
     headBar.visible: true
     headBar.background: null
-    headBar.forceCenterMiddleContent: !isMobile
+    headBar.forceCenterMiddleContent: !Shell.isMobile
     headBar.leftContent: ToolButton
     {
         icon.name: "go-previous"
@@ -295,7 +295,7 @@ Maui.Page
                             Layout.fillWidth: true
                             Layout.preferredHeight: 140
                             spacing: Maui.Style.space.medium
-                            model: _appsDB.recentApps
+                            model: Shell.appsDB.recentApps
 
                             delegate: Maui.GridBrowserDelegate
                             {
@@ -310,7 +310,7 @@ Maui.Page
 
                                 onClicked:
                                 {
-                                    _appsDB.launchApp(model.path)
+                                    Shell.appsDB.launchApp(model.path)
                                     control.close()
                                 }
                             }
@@ -362,7 +362,7 @@ Maui.Page
                         console.log("Key _pressed", event.key, _gridView.model.get(_gridView.currentIndex).executable)
                         if(event.key == Qt.Key_Return)
                         {
-                            _appsDB.launchApp(_gridView.model.get(_gridView.currentIndex).path)
+                            Shell.appsDB.launchApp(_gridView.model.get(_gridView.currentIndex).path)
                             control.close()
                         }
                     }
@@ -392,7 +392,7 @@ Maui.Page
                             onClicked:
                             {
                                 _gridView.currentIndex = index
-                                _appsDB.launchApp(model.path)
+                                Shell.appsDB.launchApp(model.path)
                                 control.close()
                             }
 

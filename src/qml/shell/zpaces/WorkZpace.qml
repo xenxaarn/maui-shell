@@ -62,7 +62,7 @@ ListView
 
     Connections
     {
-        target: _zpaces.zpacesModel
+        target: Shell.zpaces.zpacesModel
         ignoreUnknownSignals: true
         function onZpaceAdded(index)
         {

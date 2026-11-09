@@ -31,8 +31,8 @@ Pane
 
     readonly property rect availableGeometry : Qt.rect(0, 0, width, height)
 
-    topPadding: cask.topPanel.height
-    bottomPadding: formFactor === Cask.MauiMan.Desktop ? dock.height : 0
+    topPadding: Shell.cask ? Shell.cask.topPanel.height : 0
+    bottomPadding: Shell.formFactor === Cask.MauiMan.Desktop && Shell.dock ? Shell.dock.height : 0
     leftPadding: 0
     rightPadding: 0
 
@@ -151,7 +151,8 @@ Pane
                 overviewMode: control.overviewMode
                 shellSurface: model.window.shellSurface
                 window: model.window
-                scale: isMobile ? 1 : _swipeView.scale
+                zpaceItem: control
+                scale: Shell.isMobile ? 1 : Shell.workspaces.scale
 
 
                 moveItem: Item
@@ -187,8 +188,8 @@ Pane
             onTapped:
             {
 
-                _swipeView.currentIndex = index
-                _swipeView.closeOverview()
+                Shell.workspaces.currentIndex = index
+                Shell.workspaces.closeOverview()
             }
         }
 
