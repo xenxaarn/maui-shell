@@ -94,17 +94,24 @@ StackPage
         onTriggered: handler.requestScan()
     }
 
-    // Maui.InputDialog
-    // {
-    //     id: _credentialsDialog
-    //     property var connection : null
-    //     title: i18n("Connect to %1", connection.ItemUniqueName)
-    //     message: "Enter credentials to connect to network"
-    //     onFinished:
-    //     {
-    //         handler.addAndActivateConnection(connection.DevicePath, connection.SpecificPath, text)
-    //     }
-    // }
+    Maui.InputDialog
+    {
+        id: _credentialsDialog
+        property var connection : null
+
+        title: connection ? i18n("Connect to %1", connection.ItemUniqueName) : i18n("Connect")
+        message: i18n("Enter credentials to connect to network")
+
+        onFinished: (text) =>
+        {
+            if(connection)
+                handler.addAndActivateConnection(connection.DevicePath, connection.SpecificPath, text)
+
+            connectionModel.delayModelUpdates = false
+        }
+
+        onRejected: connectionModel.delayModelUpdates = false
+    }
 
     Maui.ListBrowser
     {
