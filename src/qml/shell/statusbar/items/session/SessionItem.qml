@@ -10,7 +10,7 @@ import "../../../templates"
 Cask.PanelItem
 {   
     id: control
-    display: isMobile ? ToolButton.IconOnly : ToolButton.TextBesideIcon
+    display: Shell.isMobile ? ToolButton.IconOnly : ToolButton.TextBesideIcon
 
     Connections
     {
@@ -92,7 +92,7 @@ Cask.PanelItem
             Layout.fillHeight: true
             Layout.minimumHeight: Math.max(contentHeight + Maui.Style.space.big, 200)
 
-            model: _zpaces.allSurfaces
+            model: Shell.zpaces.allSurfaces
             delegate: Maui.ListBrowserDelegate
             {
                 isCurrentItem: false
@@ -110,8 +110,8 @@ Cask.PanelItem
             text: _runningTasks.count > 0 ? i18n("Terminate") : _sessioDialog.title
             onTriggered:
             {
-                _zpaces.clearAllSurfaces()
-                if(_zpaces.allSurfaces.count === 0)
+                Shell.zpaces.clearAllSurfaces()
+                if(Shell.zpaces.allSurfaces.count === 0)
                 {
                     switch(_sessioDialog.operation)
                     {
