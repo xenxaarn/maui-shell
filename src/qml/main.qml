@@ -71,7 +71,7 @@ WaylandCompositor
         onOpenUrl:
         {
             console.log("Ask to open url", url)
-            Session.Launcher.launchCommand("xdg-open %1".arg(url))
+            Qt.openUrlExternally(url)
         }
     }
 

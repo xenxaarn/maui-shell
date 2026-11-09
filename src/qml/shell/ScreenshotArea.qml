@@ -97,7 +97,7 @@ Item
     {
         control.running = true
         _cask.grabToImage(function(result) {
-            let where = Cask.Server.screenshot.saveDir +String("/screenshot-%1.png").arg(new Date().toLocaleTimeString())
+            let where = `${Cask.Server.screenshot.saveDir}/screenshot-${new Date().toLocaleTimeString()}.png`
             result.saveToFile(where);
             if(ok)
             {
@@ -131,7 +131,7 @@ Item
         console.log("Chrome:" , chrome)
 
         chrome.grabToImage(function(result) {
-            let where = Cask.Server.screenshot.saveDir +String("/screenshot-%1.png").arg(new Date().toLocaleTimeString())
+            let where = `${Cask.Server.screenshot.saveDir}/screenshot-${new Date().toLocaleTimeString()}.png`
 
             result.saveToFile(where);
         });
