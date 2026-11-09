@@ -23,7 +23,7 @@ Control
     property rect availableGeometry
     property int currentCard : -1
 
-    spacing: isMobile ? 0 : Maui.Style.space.medium
+    spacing: Shell.isMobile ? 0 : Maui.Style.space.medium
     hoverEnabled: true
 
     padding: 0
@@ -94,9 +94,10 @@ Control
         id: popup
         z: _content.z - 6
         finalYPos : availableGeometry.y
+        availableGeometry: control.availableGeometry
 
         height: Math.min (availableGeometry.height, popup.implicitHeight)
-        width: isMobile ? availableGeometry.width : Math.min(control.popWidth, availableGeometry.width)
+        width: Shell.isMobile ? availableGeometry.width : Math.min(control.popWidth, availableGeometry.width)
 
         //        Label
         //        {
@@ -121,15 +122,15 @@ Control
             value: handler.active ? (handler.centroid.position.y -popup.height) : (popup.opened ? popup.finalYPos : availableGeometry.y)
         }
 
-        x: handler.active && win.formFactor === Cask.MauiMan.Desktop && !popup.opened ? (handler.centroid.pressPosition.x - (width/2)) : setXAlignment(popup.alignment)
+        x: handler.active && Shell.formFactor === Cask.MauiMan.Desktop && !popup.opened ? (handler.centroid.pressPosition.x - (width/2)) : setXAlignment(popup.alignment)
 
         function setXAlignment(alignment)
         {
             switch(alignment)
             {
-            case Qt.AlignLeft: return isMobile ? 0 : 0;
+            case Qt.AlignLeft: return Shell.isMobile ? 0 : 0;
             case Qt.AlignCenter: return Math.round((control.width/2 ) - (popup.width/2));
-            case Qt.AlignRight: return  0-(width - control.width)+(isMobile ? 0 : 0);
+            case Qt.AlignRight: return  0-(width - control.width)+(Shell.isMobile ? 0 : 0);
             default: return 0;
             }
         }
