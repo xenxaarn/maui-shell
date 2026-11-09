@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -uo pipefail
+set -euo pipefail
 SUDO=""; [ "$(id -u)" -ne 0 ] && SUDO="sudo"
 
 PKGS=(
@@ -21,6 +21,8 @@ PKGS=(
   phonon-qt6-devel polkit-qt6-1-devel polkit-devel libcanberra-devel pulseaudio-libs-devel
   glib2-devel fontconfig-devel wayland-devel wayland-protocols-devel libxkbcommon-devel
   libxcb-devel xcb-util-wm-devel libX11-devel
+  akonadi-server akonadi-calendar akonadi-contacts grantleetheme kcalutils
+  kidentitymanagement kf6-ktexttemplate
 )
 
 $SUDO dnf install -y --setopt=strict=0 "${PKGS[@]}"
