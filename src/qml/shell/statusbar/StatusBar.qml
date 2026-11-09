@@ -222,7 +222,8 @@ Control
             AudioPlayerItem
             {
                 id: _mediaController
-                visible: /*_revealer.checked || */isPlaying
+                labelsVisible: control.labelsVisible
+                visible: _mediaController.isPlaying
             }
 
             SessionItem

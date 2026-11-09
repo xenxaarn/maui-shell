@@ -9,12 +9,13 @@ Cask.PanelItem
 {
     id: control
     property var mprisSourcesModel: []
+    property bool labelsVisible: true
     readonly property bool isPlaying : _playersList.currentItem && _playersList.currentItem.item ? _playersList.currentItem.item.isPlaying : false
 
 
     Cask.IconLabel
     {
-        icon.source: isPlaying ? "media-playback-start" : "media-playback-pause"
+        icon.source: isPlaying ? "media-playback-pause" : "media-playback-start"
         height: control.iconSize
         icon.color: control.icon.color
     }
@@ -113,7 +114,7 @@ Cask.PanelItem
                         Action
                         {
                             text: "Vvave"
-                            onTriggered: dock.launchExec("vvave")
+                            onTriggered: { if(Shell.appsDB) Shell.appsDB.launchApp("vvave") }
                         }
                     }
 
