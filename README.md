@@ -34,17 +34,15 @@ Run all build scripts  :
 
 Maui Shell can run as a window inside an X11 session, open a terminal and run `cask`. There is a Wayland session  too if you’d like to test the Maui Shell using a Wayland sesson.
 
-To run un Cask in window mode, you can launch ‘cask -w,’ which will allow you to test different sizes to emulate tablet or phone form factors.
+To run un Cask in window mode, you can launch `cask -w` which will allow you to test different sizes to emulate tablet or phone form factors.
 
-Using a different TTY is also possible to test Maui Shell; in this case, you would need to use the program ‘startcask-wayland’.
+Using a different TTY is also possible to test Maui Shell; in this case, you would need to use the program `startcask-wayland`
 
 If you try it within another session, you can launch `cask -l /tmp/cask.log` to generate a log file; this is useful if you want to report an issue later.
 
 To ensure the input works correctly, you need to add your user to the `input` group.
 
 Eventually, Cask can run Weston and GTK3 apps.
-
-Cask does not include an embedded X server yet, but it might be possible.
 
 # Contributing
 
