@@ -136,7 +136,7 @@ Pane
         data: Repeater
         {
             id: _repeater
-            model: zpace.windows
+            model: zpace ? zpace.windows : null
 
             onItemRemoved:
             {

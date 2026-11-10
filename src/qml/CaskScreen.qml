@@ -94,7 +94,9 @@ WaylandOutput
     }
 
     sizeFollowsWindow: true
-    availableGeometry : _swipeView.currentItem.availableGeometry
+    availableGeometry : _swipeView.currentItem
+                         ? _swipeView.currentItem.availableGeometry
+                         : control.geometry
 
     // scaleFactor: Cask.MauiMan.screen.scaleFactor
     //    transform: switch(control.orientation)

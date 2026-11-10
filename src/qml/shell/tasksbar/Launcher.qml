@@ -538,7 +538,7 @@ Maui.Page
         id: handler3
         target: control
         dragThreshold: 60
-        enabled: control.opened && _stackView.currentItem.atYBeginning
+        enabled: control.opened && _stackView.currentItem && _stackView.currentItem.atYBeginning
         yAxis.minimum: control.finalYPos
 
         xAxis.enabled : false
@@ -569,7 +569,8 @@ Maui.Page
     {
         _launcher.opened = false
         _launcher.y = control.parent.height
-        workspaces.currentItem.forceActiveFocus()
+        if (workspaces.currentItem)
+            workspaces.currentItem.forceActiveFocus()
 //        dock.forceActiveFocus()
     }
 
