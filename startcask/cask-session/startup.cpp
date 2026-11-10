@@ -173,7 +173,7 @@ Startup::Startup(QObject *parent)
 //        new StartServiceJob(QStringLiteral("/usr/lib/org_kde_powerdevil"), {},"", {}),
 
         new StartServiceJob(QStringLiteral("CaskServer"), QStringList(), QStringLiteral("org.cask.Server")),
-        new StartServiceJob(QStringLiteral("MauiManServer"), QStringList(), QStringLiteral("org.mauiman.Manager")),
+        new StartServiceJob(QStringLiteral("MauiManServer4"), QStringList(), QStringLiteral("org.mauiman.Manager")),
 
         new StartServiceJob(QStringLiteral("cask"), QStringList(), QStringLiteral("")),
 
@@ -190,6 +190,12 @@ Startup::Startup(QObject *parent)
         if (!job) {
             continue;
         }
+
+        // KJob deletes itself by default once it finishes. SessionTrack keeps
+        // the QProcess objects owned by these jobs and terminates them on
+        // logout, so auto-deletion would leave dangling pointers.
+        job->setAutoDelete(false);
+
         if (last) {
             connect(last, &KJob::finished, job, &KJob::start);
         }
@@ -247,6 +253,9 @@ bool Startup::startDetached(const QString &program, const QStringList &args)
 
 bool Startup::startDetached(QProcess *process)
 {
+    // Without this the children's stdout/stderr stay buffered inside the
+    // QProcess and are lost, making a failed session impossible to diagnose.
+    process->setProcessChannelMode(QProcess::ForwardedChannels);
     process->start();
     const bool ret = process->waitForStarted();
     if (ret) {
