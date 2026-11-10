@@ -77,7 +77,6 @@ Item
         target: Cask.Server.screenshot
         function onTakeScreenshot(type, id)
         {
-            console.log("GRAB SCREEN FROM THE SERVER REQUEDTED", id, type)
             switch(type)
             {
             case Cask.CaskScreenshot.CurrentScreen: control.grabCurrentScreen(id); return;
@@ -105,11 +104,9 @@ Item
 
         if(!result || !result.saveToFile(where))
         {
-            console.log("SCREENSHOT FAILED", where)
             Cask.Server.screenshot.setScreenshotReady("", id)
         }else
         {
-            console.log("SCREENSHOT RESULT", result.url, where)
             Cask.Server.screenshot.setScreenshotReady(where, id)
         }
 
@@ -120,7 +117,6 @@ Item
     {
         if(!item)
         {
-            console.log("No item to grab screenshot from")
             Cask.Server.screenshot.setScreenshotReady("", id)
             return
         }
@@ -150,14 +146,12 @@ Item
 
         if(window == null)
         {
-            console.log("No window to grab screenshot")
             Cask.Server.screenshot.setScreenshotReady("", id)
             return
         }
 
         if(!window.chrome)
         {
-            console.log("Window has no chrome yet")
             Cask.Server.screenshot.setScreenshotReady("", id)
             return
         }

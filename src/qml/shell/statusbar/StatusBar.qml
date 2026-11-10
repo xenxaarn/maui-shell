@@ -130,7 +130,6 @@ Control
         //        triggeredOnStart: true
         onTriggered:
         {
-            console.log("_timer triggered")
             if(control.autohide && !control.hidden && !_handler.active && !(_notificationsSection.popup.opened || _statusSection.popup.opened) && !_statusSection.hovered)
             {
                 control.hide()

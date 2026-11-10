@@ -44,7 +44,6 @@ QVariant TasksModel::data(const QModelIndex &index, int role) const
 
     auto window = task->window();
 
-    qDebug() << "Askign for taksbar mdoel data" << role;
     switch(role)
     {
     case Roles::SurfaceIndex: return QVariant( window ? m_zpaces->indexOfWindow(window) : -1);
@@ -69,17 +68,14 @@ void TasksModel::addTask(AbstractWindow *window)
     if(!window)
         return;
 
-    qDebug() << "trying to insert a task" << window << window->appId();
 
     //here needs to find if the window appid belongs to an existing task.
     Task * task = nullptr;
     task = findTask(window->appId());
 
-    qDebug() << "Trying to deal with new window <<" << window->appId() << (task == nullptr);
 
     if(task && task->window() == nullptr)
     {
-        qDebug() << "Setting window to existing task" << task << (task->window() == nullptr);
         task->setWindow(window);
     }else
     {
@@ -202,7 +198,6 @@ void TasksModel::addTask(Task *task)
 
 Task *TasksModel::findTask(const QString &id)
 {
-    qDebug() << "task Service exec" << id;
 
     if(id.isEmpty())
         return nullptr;
@@ -212,7 +207,6 @@ Task *TasksModel::findTask(const QString &id)
         return nullptr;
 
     const auto idExec = service->exec();
-    qDebug() << "task Service exec" << idExec;
 
     if(idExec.isEmpty())
         return nullptr;

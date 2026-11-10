@@ -25,7 +25,6 @@ SurfacesModel::SurfacesModel(QObject *parent) : QAbstractListModel(parent)
 
 SurfacesModel::~SurfacesModel()
 {
-    qDebug() << "DELETING SURFACES MODEL" << m_windows.size();
 
     // This model never owns the windows. Connections are context-bound to this
     // object, so they are disconnected automatically; clear the bookkeeping.
@@ -236,7 +235,6 @@ QVariant SurfacesModel::data(const QModelIndex &index, int role) const
     if (!window)
         return QVariant();
 
-    qDebug() << "REQUESTING FORF A WINDOW <<" << role;
     switch(role)
     {
     case Roles::ShellSurface: return QVariant::fromValue(window->shellSurface());

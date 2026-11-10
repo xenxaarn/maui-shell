@@ -120,7 +120,7 @@ StackPage
         padding: 0
         model: appletProxyModel
         currentIndex: -1
-        holder.title: "oops"
+        holder.title: i18n("Networks")
         holder.visible: count === 0
         holder.body: {
             if (control.displayplaneModeMessage) {

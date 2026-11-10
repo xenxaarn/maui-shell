@@ -11,7 +11,6 @@ ZpacesModel::ZpacesModel(Zpaces *parent) : QAbstractListModel(parent)
 
 ZpacesModel::~ZpacesModel()
 {
-    qDebug() << "DELETIGN ZPACESMODEL" << m_zpacesList.count();
 
     qDeleteAll(m_zpacesList);
 //    for(auto zpace : m_zpacesList)
@@ -59,7 +58,6 @@ Zpace *ZpacesModel::zpace(const int &index)
 
 Zpace *ZpacesModel::addZpace()
 {
-    qDebug() << "trying to add a new zpace";
 
     auto newZpace = createZpace();// this is not the parent but a reference to the model
 
@@ -72,7 +70,6 @@ Zpace *ZpacesModel::addZpace()
     Q_EMIT this->countChanged();
     Q_EMIT this->zpaceAdded(index);
 
-    qDebug() << "trying to add a new zpace" << rowCount(QModelIndex());
 
     return newZpace;
 }
@@ -96,7 +93,6 @@ void ZpacesModel::removeZpace(const int &index)
 {
     if(!indexIsValid(index))
         return;
-    qDebug() << "REMOVING THE ZPACE";
 
     Zpace *zpace = m_zpacesList.at(index);
 

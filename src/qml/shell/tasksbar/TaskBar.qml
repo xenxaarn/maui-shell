@@ -185,7 +185,6 @@ Control
                         {
                             Shell.workspaces.currentIndex = model.zpaceIndex
 
-                            console.log("MINIMIZED?" , xdgWindow.minimized)
 
                             if(xdgWindow.toplevel.activated)
                             {
@@ -239,7 +238,6 @@ Control
         {
             onWheel:
             {
-                console.log("WHell on dock")
                 if(event.angleDelta.y > 0)
                 {
                     Shell.zpaces.allSurfaces.activateNextWindow()
@@ -259,7 +257,6 @@ Control
             {
                 if(url.endsWith(".desktop"))
                 {
-                    console.log("Dropped things" , url)
                     Shell.zpaces.tasksModel.addTask(url, true)
                     if(Shell.dock && Shell.dock.launcher)
                         Shell.dock.launcher.close()

@@ -84,7 +84,6 @@ Item
         //        acceptedDevices: PointerDevice.Mouse | PointerDevice.TouchPad
         onActiveChanged:
         {
-            console.log("WHEEL HANMDLER ACTIVE", rotation)
 
             if(!active)
             {

@@ -316,7 +316,6 @@ Cask.StackableItem
 
         function onSetMaximized()
         {
-            console.log("SET MAX", toplevel.maximized, oldPos)
 
             oldPos.x = rootChrome.moveItem.x
             oldPos.y = rootChrome.moveItem.y
@@ -334,7 +333,6 @@ Cask.StackableItem
 
         function onUnsetMaximized()
         {
-            console.log("SET UNMAX", toplevel.maximized, oldPos)
             if(oldPos.width === -1)
             {
                 oldPos = Qt.rect(0, 0, rootChrome.width * 0.6, rootChrome.height*0.6)
@@ -350,7 +348,6 @@ Cask.StackableItem
 
         //        function onSetFullscreen()
         //        {
-        //            console.log("FUCK MY LIFE")
 
         //            oldPos.x = rootChrome.x
         //            oldPos.y = rootChrome.y
@@ -366,7 +363,6 @@ Cask.StackableItem
 
         //        function onUnsetFullscreen()
         //        {
-        //            console.log("FUCK MY LIFE")
 
         //            rootChrome.x = oldPos.x
         //            rootChrome.y = oldPos.y

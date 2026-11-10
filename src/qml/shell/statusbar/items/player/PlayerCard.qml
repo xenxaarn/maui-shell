@@ -182,7 +182,6 @@ ItemDelegate
 
     Component.onDestruction:
     {
-        console.log("DESTROY PLAYER CARD")
     }
 
 }

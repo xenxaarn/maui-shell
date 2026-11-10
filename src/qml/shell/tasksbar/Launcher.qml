@@ -359,7 +359,6 @@ Maui.Page
 
                     Keys.onPressed: (event) =>
                     {
-                        console.log("Key _pressed", event.key, _gridView.model.get(_gridView.currentIndex).executable)
                         if(event.key == Qt.Key_Return)
                         {
                             Shell.appsDB.launchApp(_gridView.model.get(_gridView.currentIndex).path)

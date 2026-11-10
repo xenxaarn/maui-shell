@@ -14,7 +14,6 @@ Zpace::Zpace(ZpacesModel *parent) : QObject(parent)
 {
     connect(m_windowsModel, &SurfacesModel::countChanged, [this]()
     {
-        qDebug() << "SHOUDL IT REMOVE THE ZPACE TOO?";
         if(m_windowsModel->count() == 0 && m_zpacesModelRoot && m_zpacesModelRoot->count() > 1)
         {
             Q_EMIT this->closed();
@@ -35,7 +34,6 @@ Zpace::Zpace(ZpacesModel *parent) : QObject(parent)
 
 Zpace::~Zpace()
 {
-    qDebug() << "DELETIGN ZPACE";
 }
 
 SurfacesModel *Zpace::windows() const

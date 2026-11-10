@@ -26,7 +26,6 @@ PolKitAgentListener::PolKitAgentListener(QObject *parent)
     : PolkitQt1::Agent::Listener(parent)
     , m_dialog(nullptr)
 {
-    qDebug() << "POLKIT STARTED";
 
 }
 
@@ -38,7 +37,6 @@ void PolKitAgentListener::initiateAuthentication(const QString &actionId,
                                                  const PolkitQt1::Identity::List &identities,
                                                  PolkitQt1::Agent::AsyncResult *result)
 {
-    qDebug() << "POLKIT CALLED" << actionId << message;
     Q_UNUSED(iconName);
     Q_UNUSED(details);
 

@@ -89,7 +89,7 @@ Cask.PanelItem
                 ToggleTemplate
                 {
                     icon.name: _slidersItem.micItem.slider.iconSource
-                    text: "Michrophone"
+                    text: i18n("Microphone")
                     checked: !_slidersItem.micItem.muted
                     onClicked: _slidersItem.micItem.toggleMute()
                     Layout.fillWidth: true

@@ -24,7 +24,6 @@ Zpaces::Zpaces(QObject *parent) : QObject(parent)
 
 Zpaces::~Zpaces()
 {
-    qDebug() << "DELETING ZPACES";
 
 //        m_allSurfaces->deleteLater();
 //        m_tasksModel->deleteLater();
@@ -57,7 +56,6 @@ int Zpaces::addWindow(AbstractWindow *window, const int &fromIndex)
     if(!window)
         return -1;
 
-    qDebug() << "trying to add window" << window;
     window->setParent(nullptr); // windows are unparented; XdgWindow deletes itself when its Wayland surface is destroyed
 
     //add window to allSurfacesModel
@@ -228,7 +226,6 @@ void Zpaces::setZpacesMode()
     if(!m_output)
         return;
 
-    qDebug() << "OUTPUT GEOMETRY CHANGED";
     auto geometry = m_output->geometry();
 
     //    auto position = m_output->position();
@@ -236,11 +233,6 @@ void Zpaces::setZpacesMode()
 
     //    auto screen = m_output->window()->screen();
     //    bool devicePixelRatio = screen->devicePixelRatio();
-    qDebug() << "CHECKING FOR TOUCH DEVICES";
-    //for(const auto &device : QTouchDevice::devices())
-    //{
-    //    qDebug() << "DEVICE" << device->capabilities() <<device->maximumTouchPoints() << device->name() << device->type();
-    //}
 
     if(geometry.width() > 1500)
     {

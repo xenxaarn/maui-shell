@@ -157,7 +157,6 @@ ItemDelegate
         }
     }
 
-    onClicked: console.log("NOF", control.x)
 
     DragHandler
     {

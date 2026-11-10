@@ -167,9 +167,6 @@ static qreal highestDPR(QList<QScreen *> screens)
 {
     qreal ret = 1.0;
     for (const QScreen *scr : screens) {
-        qDebug() << "Screen" << scr->name() << scr->geometry() << scr->physicalSize()
-                 << "DPI: log" << scr->logicalDotsPerInch() << "phys" << scr->physicalDotsPerInch()
-                 << "DPR" << scr->devicePixelRatio();
         ret = qMax(ret, scr->devicePixelRatio());
     }
     return ret;
@@ -177,7 +174,6 @@ static qreal highestDPR(QList<QScreen *> screens)
 
 void sigintHandler(int signalNumber)
 {
-    qDebug() << "terminating cask session" << signalNumber;
 }
 
 static void setupEnviroment()
@@ -316,7 +312,6 @@ int main(int argc, char *argv[])
         // QTBUG-67579: we can't have different cursor sizes on different screens
         // or different windows yet, but we can override globally
         int cursorSize = int(32 * dpr);
-        qDebug() << "highest DPR" << dpr << "-> cursor size" << cursorSize;
         qputenv("XCURSOR_SIZE", QByteArray::number(cursorSize));
     }
 

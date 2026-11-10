@@ -250,7 +250,6 @@ WaylandOutput
                 Keys.onPressed: (event) =>
                                 {
                                     if (event.key == Qt.Key_Left) {
-                                        console.log("move left");
                                         dock.launcher.toggle()
 
                                         event.accepted = true;
@@ -258,7 +257,6 @@ WaylandOutput
 
                                     if((event.key === Qt.Key_Meta))
                                     {
-                                        console.log("move meta");
 
                                         dock.launcher.toggle()
                                         event.accepted = true
@@ -270,7 +268,6 @@ WaylandOutput
                     sequence: "Meta+A" // maybe not the best one... or maybe we don't need it at all
                     onActivated:
                     {
-                        console.log("META AAAA")
                         dock.launcher.toggle()
                     }
                 }
@@ -280,7 +277,6 @@ WaylandOutput
                     sequence: "Alt+Q" // maybe not the best one... or maybe we don't need it at all
                     onActivated:
                     {
-                        console.log("TABBING")
                         _zpaces.allSurfaces.activateNextWindow()
                     }
                 }
@@ -394,7 +390,6 @@ WaylandOutput
 
     Component.onDestruction:
     {
-        console.log("DESTROY SCREEN")
     }
 
 }

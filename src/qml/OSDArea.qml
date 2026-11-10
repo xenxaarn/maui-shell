@@ -19,7 +19,7 @@ Container
         spacing: control.spacing
         ToolButton
         {
-            text: "add"
+            text: i18n("Add")
             onClicked: control.pushOSD(_component)
 
         }

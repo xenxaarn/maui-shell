@@ -66,11 +66,9 @@ WaylandCompositor
     QtWindowManager
     {
         id: qtWindowManager
-        onShowIsFullScreenChanged: console.debug("Show is fullscreen hint for Qt applications:", showIsFullScreen)
         //        showIsFullScreen: false
         onOpenUrl:
         {
-            console.log("Ask to open url", url)
             Qt.openUrlExternally(url)
         }
     }
@@ -111,17 +109,14 @@ WaylandCompositor
         target: defaultSeat
         function onCursorSurfaceRequest()
         {
-            console.log("CURSOR SURFACE REQUEST"/*,hotspotX, hotspotY, surface.cursorSurface, surface.hasContent, surface.inhibitsIdle*/)
         }
 
         function onKeyboardFocusChanged()
         {
-            console.log("KEYBOARD FOCUS REQUEST")
         }
 
         function onMouseFocusChanged()
         {
-            console.log("MOUSE FOCUS REQUEST")
         }
     }
 
@@ -130,18 +125,15 @@ WaylandCompositor
 //        target: comp.drag
 //        function onDragStarted()
 //        {
-//            console.log("DRAG STARTED")
 //        }
 
 //        function onIconChanged()
 //        {
-//            console.log("DRAG ICON CHANGED")
 //        }
 //    }
 
     function handleShellSurfaceCreated(shellSurface, toplevel)
     {
-        console.log(shellSurface.windowType)
 
         let window = screen.zpaces.createXdgWindow(shellSurface, toplevel)
 
