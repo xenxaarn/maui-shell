@@ -84,14 +84,14 @@ Cask.PanelItem
 
     card: Cask.PanelCard
     {
-        width: ListView.view.width
+        width: ListView.view ? ListView.view.width : 0
         onClosed: _togglesStack.pop()
 
         StackView
         {
             id : _togglesStack
-            width: parent.width
-            height: currentItem.implicitHeight
+            width: parent ? parent.width : 0
+            height: currentItem ? currentItem.implicitHeight : 0
             clip: true
             padding: 0
 
@@ -114,7 +114,7 @@ Cask.PanelItem
                         Action
                         {
                             text: "Vvave"
-                            onTriggered: { if(Shell.appsDB) Shell.appsDB.launchApp("vvave") }
+                            onTriggered: { if(CaskShell.appsDB) CaskShell.appsDB.launchApp("vvave") }
                         }
                     }
 

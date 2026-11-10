@@ -60,7 +60,7 @@ Pane
     background: Rectangle
     {
         color: Maui.Theme.backgroundColor
-        radius: Shell.isMobile ? 0 : Maui.Style.radiusV
+        radius: CaskShell.isMobile ? 0 : Maui.Style.radiusV
 
         Behavior on radius
         {

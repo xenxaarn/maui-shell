@@ -109,8 +109,8 @@ ItemDelegate
 
             onClicked:
             {
-                if(Shell.notifications)
-                    Shell.invokeNotificationAction(control.notificationId, modelData.actionId)
+                if(CaskShell.notifications)
+                    CaskShell.invokeNotificationAction(control.notificationId, modelData.actionId)
             }
 
             background: Rectangle

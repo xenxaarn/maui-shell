@@ -12,6 +12,12 @@ import "../../../../../templates"
 StackPage
 {
     id: control
+
+    // The PlasmaNM.Handler lives in NetworkToggle.qml. QML ids are file-local,
+    // so it has to be handed over explicitly instead of being read from the
+    // toggle's scope.
+    property var handler
+
     implicitHeight: Math.max(400, Math.min(400, _listView.contentHeight + topPadding + bottomPadding + headerContainer.implicitHeight + footerContainer.implicitHeight + Maui.Style.space.big))
     title: i18n("Networks")
 
@@ -106,11 +112,7 @@ StackPage
         {
             if(connection)
                 handler.addAndActivateConnection(connection.DevicePath, connection.SpecificPath, text)
-
-            connectionModel.delayModelUpdates = false
         }
-
-        onRejected: connectionModel.delayModelUpdates = false
     }
 
     Maui.ListBrowser
@@ -163,19 +165,10 @@ StackPage
                         handler.deactivateConnection(ConnectionPath, DevicePath)
                     }
                 } else if (predictableWirelessPassword) {
-                    connectionModel.delayModelUpdates = true
                     _credentialsDialog.connection = model
                     _credentialsDialog.open()
                 }
             }
-        }
-    }
-
-    Component.onDestruction:
-    {
-        if ( connectionModel != null)
-        {
-            connectionModel.delayModelUpdates = false;
         }
     }
 

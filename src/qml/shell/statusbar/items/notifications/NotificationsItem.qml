@@ -23,7 +23,7 @@ Cask.PanelItem
 
     card: Cask.PanelCard
     {
-        width: ListView.view.width
+        width: ListView.view ? ListView.view.width : 0
 
         ListView
         {
@@ -32,7 +32,7 @@ Cask.PanelItem
             clip: true
             implicitHeight: Math.max(300, Math.min(500, contentHeight))
             boundsBehavior: ListView.StopAtBounds
-            model: Shell.notifications ? Shell.notifications.notificationsModel.historyModel : null
+            model: CaskShell.notifications ? CaskShell.notifications.notificationsModel.historyModel : null
             spacing: Maui.Style.space.medium
 
             section.delegate: Maui.LabelDelegate
@@ -62,7 +62,7 @@ Cask.PanelItem
                 message: model.body
                 iconSource: model.iconName
                 imageSource : model.image
-                onDismissed:Shell.notifications.notificationsModel.historyModel.remove(index)
+                onDismissed:CaskShell.notifications.notificationsModel.historyModel.remove(index)
                 background: Rectangle
                 {
                     color: hovered? Qt.lighter(Maui.Theme.backgroundColor) : Maui.Theme.backgroundColor
@@ -79,7 +79,7 @@ Cask.PanelItem
                 {
                     visible:  _nofList.count !== 0
                     icon.name: "edit-clear-all"
-                    onClicked: Shell.notifications.notificationsModel.historyModel.clearAll()
+                    onClicked: CaskShell.notifications.notificationsModel.historyModel.clearAll()
                 },
 
                 ToolButton
@@ -93,8 +93,8 @@ Cask.PanelItem
 //                text: "Silent"
                 icon.name: checked? "notifications-disabled" : "notifications-enabled"
                 checkable: true
-                checked: Shell.notifications.notificationsModel.doNotDisturb
-                onToggled: Shell.notifications.notificationsModel.doNotDisturb = checked
+                checked: CaskShell.notifications ? CaskShell.notifications.notificationsModel.doNotDisturb : false
+                onToggled: { if(CaskShell.notifications) CaskShell.notifications.notificationsModel.doNotDisturb = checked }
 
             }
         }

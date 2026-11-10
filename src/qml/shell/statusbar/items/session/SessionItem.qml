@@ -10,7 +10,7 @@ import "../../../templates"
 Cask.PanelItem
 {   
     id: control
-    display: Shell.isMobile ? ToolButton.IconOnly : ToolButton.TextBesideIcon
+    display: CaskShell.isMobile ? ToolButton.IconOnly : ToolButton.TextBesideIcon
 
     Connections
     {
@@ -92,12 +92,12 @@ Cask.PanelItem
             Layout.fillHeight: true
             Layout.minimumHeight: Math.max(contentHeight + Maui.Style.space.big, 200)
 
-            model: Shell.zpaces.allSurfaces
+            model: CaskShell.zpaces ? CaskShell.zpaces.allSurfaces : null
             delegate: Maui.ListBrowserDelegate
             {
                 isCurrentItem: false
                 background: null
-                width: ListView.view.width
+                width: ListView.view ? ListView.view.width : 0
                 label1.text: model.window.title
                 label2.text: model.window.appName
                 iconSource: model.window.iconName
@@ -110,8 +110,8 @@ Cask.PanelItem
             text: _runningTasks.count > 0 ? i18n("Terminate") : _sessioDialog.title
             onTriggered:
             {
-                Shell.zpaces.clearAllSurfaces()
-                if(Shell.zpaces.allSurfaces.count === 0)
+                CaskShell.zpaces.clearAllSurfaces()
+                if(CaskShell.zpaces.allSurfaces.count === 0)
                 {
                     switch(_sessioDialog.operation)
                     {
@@ -143,15 +143,15 @@ Cask.PanelItem
 
     card: Cask.PanelCard
     {
-        width: ListView.view.width
+        width: ListView.view ? ListView.view.width : 0
         onClosed: _stack.pop()
 
         StackView
         {
             id: _stack
 
-            width: parent.width
-            height: currentItem.implicitHeight
+            width: parent ? parent.width : 0
+            height: currentItem ? currentItem.implicitHeight : 0
             clip: true
             padding: 0
             leftPadding: padding
@@ -165,13 +165,13 @@ Cask.PanelItem
                 BatteryToggle
                 {
                     id: _batteryProgressBar
-                    width: parent.width
+                    width: parent ? parent.width : 0
                     onClicked: _stack.push(page)
                 }
 
                 RowLayout
                 {
-                    width: parent.width
+                    width: parent ? parent.width : 0
                     property int display: ToolButton.IconOnly
                     spacing: Maui.Style.space.medium
 

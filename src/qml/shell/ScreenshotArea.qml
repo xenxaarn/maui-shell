@@ -130,7 +130,7 @@ Item
     function grabCurrentScreen(id : string)
     {
         // The window content item contains the whole compositor output.
-        grabItem(Shell.win ? Shell.win.contentItem : null, id)
+        grabItem(CaskShell.win ? CaskShell.win.contentItem : null, id)
     }
 
     function grabAllScreens(id: string)
@@ -142,7 +142,7 @@ Item
 
     function grabCurrentWindow(id : string)
     {
-        const window = Shell.zpaces ? Shell.zpaces.allSurfaces.activeWindow : null
+        const window = CaskShell.zpaces ? CaskShell.zpaces.allSurfaces.activeWindow : null
 
         if(window == null)
         {

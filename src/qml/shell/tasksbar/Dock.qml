@@ -27,7 +27,7 @@ Item
     {
         id: overlay
         visible: _launcher.visible
-        parent: Shell.cask.overlay
+        parent: CaskShell.cask ? CaskShell.cask.overlay : null
         //        opacity: formFactor !== Cask.MauiMan.Desktop ? 0.95 : 0.7
 
         anchors.fill: parent
@@ -46,7 +46,7 @@ Item
                 saturation: -0.5
                 blur: 1.0
                 autoPaddingEnabled: true
-                source: Shell.cask.container
+                source: CaskShell.cask ? CaskShell.cask.container : null
 
 
                 Rectangle
@@ -110,7 +110,7 @@ Item
         id: _launcher
         visible: handler2.active || opened
         width: Math.min(1200, parent.width)
-        height: fullscreenLauncher ? Shell.cask.avaliableHeight- (control.height) : Math.min(Shell.cask.avaliableHeight - (control.height) , 800)
+        height: !CaskShell.cask ? 0 : (fullscreenLauncher ? CaskShell.cask.avaliableHeight - control.height : Math.min(CaskShell.cask.avaliableHeight - control.height, 800))
 
         Binding on y
         {
@@ -118,7 +118,7 @@ Item
             restoreMode: Binding.RestoreBindingOrValue
         }
 
-        x: handler2.active && Shell.formFactor === Cask.MauiMan.Desktop && !_launcher.opened ? (handler2.centroid.scenePressPosition.x - (width/2)) :  Math.round((control.width/2 ) - (_launcher.width/2));
+        x: handler2.active && CaskShell.formFactor === Cask.MauiMan.Desktop && !_launcher.opened ? (handler2.centroid.scenePressPosition.x - (width/2)) :  Math.round((control.width/2 ) - (_launcher.width/2));
 
     }
 

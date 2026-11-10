@@ -10,7 +10,7 @@
  * CaskScreen.qml) and the components loaded from separate files. QML ids are
  * file-local, so components such as Chrome, Dock or PanelItem can not reach
  * the objects created in CaskScreen.qml directly. CaskApp exposes one instance
- * of this class as the `Shell` context property and the owning QML files fill
+ * of this class as the `CaskShell` context property and the owning QML files fill
  * in the references.
  */
 class ShellState : public QObject

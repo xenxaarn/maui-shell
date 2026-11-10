@@ -18,12 +18,12 @@ Control
     id: control
 
     property rect availableGeometry
-    readonly property bool floating : Shell.formFactor === Cask.MauiMan.Desktop
+    readonly property bool floating : CaskShell.formFactor === Cask.MauiMan.Desktop
     readonly property bool cardsOverlapping : (_notificationsSection.popup.width + _statusSection.popup.width) > availableGeometry.width
 
     property bool hidden : contentItem.y === 0- control.height
     property bool autohide: false
-    property bool labelsVisible: Shell.formFactor === Cask.MauiMan.Desktop
+    property bool labelsVisible: CaskShell.formFactor === Cask.MauiMan.Desktop
 
     Layout.fillWidth: true
     //    Layout.margins: floating ? Maui.Style.space.tiny : 0
@@ -228,7 +228,7 @@ Control
             SessionItem
             {
                 id: _sessionItem
-                visible: !Shell.isMobile
+                visible: !CaskShell.isMobile
             }
         }
     }
@@ -247,4 +247,3 @@ Control
         control.contentItem.y = 0- control.height
     }
 }
-

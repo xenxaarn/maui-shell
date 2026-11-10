@@ -88,20 +88,6 @@ WaylandOutput
     property bool isNestedCompositor: Qt.platform.pluginName.startsWith("wayland") || Qt.platform.pluginName === "xcb"
     property bool showDesktop : true
 
-    // Shell-wide state shared with the components loaded from other QML files.
-    Binding { target: Shell; property: "win"; value: win }
-    Binding { target: Shell; property: "formFactor"; value: win.formFactor }
-    Binding { target: Shell; property: "isMobile"; value: control.isMobile }
-    Binding { target: Shell; property: "availableGeometry"; value: control.availableGeometry }
-    Binding { target: Shell; property: "zpaces"; value: _zpaces }
-    Binding { target: Shell; property: "cask"; value: _cask }
-    Binding { target: Shell; property: "dock"; value: _dock }
-    Binding { target: Shell; property: "workspaces"; value: _swipeView }
-    Binding { target: Shell; property: "screenshot"; value: _screenshotArea }
-    Binding { target: Shell; property: "appsDB"; value: _appsDB }
-    Binding { target: Shell; property: "screen"; value: control }
-    Binding { target: Shell; property: "appsOverview"; value: _appsOverview }
-
     Cask.AppsDB
     {
         id: _appsDB
@@ -387,6 +373,31 @@ WaylandOutput
             }
         }
     }
+
+    // Shell-wide state shared with the components loaded from other QML files.
+    // The objects below are created as part of this component, so they can only
+    // be handed over once the whole component is complete. Binding elements
+    // evaluated earlier would capture null for these ids and never update.
+    Component.onCompleted:
+    {
+        CaskShell.win = win
+        CaskShell.zpaces = _zpaces
+        CaskShell.cask = _cask
+        CaskShell.dock = _dock
+        CaskShell.workspaces = _swipeView
+        CaskShell.screenshot = _screenshotArea
+        CaskShell.appsDB = _appsDB
+        CaskShell.screen = control
+        CaskShell.appsOverview = _appsOverview
+        CaskShell.availableGeometry = control.availableGeometry
+        CaskShell.formFactor = win.formFactor
+        CaskShell.isMobile = control.isMobile
+    }
+
+    // These two are driven by a singleton with change notifications, so keep
+    // them as live bindings instead of one-shot assignments.
+    Binding { target: CaskShell; property: "formFactor"; value: Cask.MauiMan.formFactor.preferredMode }
+    Binding { target: CaskShell; property: "isMobile"; value: Cask.MauiMan.formFactor.preferredMode === Cask.MauiMan.Phone }
 
     Component.onDestruction:
     {

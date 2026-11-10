@@ -39,7 +39,7 @@ WaylandCompositor
         id: _notifications
     }
 
-    Binding { target: Shell; property: "notifications"; value: _notifications }
+    Binding { target: CaskShell; property: "notifications"; value: _notifications }
 
     Component
     {

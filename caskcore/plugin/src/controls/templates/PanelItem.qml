@@ -14,7 +14,7 @@ AbstractButton
 
     property Cask.PanelCard card : null
     property Cask.PanelSection section : control.parent.parent
-    property bool flat: Shell.formFactor !== Cask.MauiMan.Desktop
+    property bool flat: CaskShell.formFactor !== Cask.MauiMan.Desktop
 
     focus: true
     focusPolicy: Qt.StrongFocus

@@ -180,7 +180,7 @@ void CaskApp::startup()
            //                                                m_sessionManager);
 
     m_appEngine->rootContext()->setContextObject(new KLocalizedContext(m_appEngine));
-    m_appEngine->rootContext()->setContextProperty(QStringLiteral("Shell"), m_shellState);
+    m_appEngine->rootContext()->setContextProperty(QStringLiteral("CaskShell"), m_shellState);
 
 
     qunsetenv("QT_SCALE_FACTOR");

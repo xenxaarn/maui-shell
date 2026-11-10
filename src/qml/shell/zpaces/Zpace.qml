@@ -31,8 +31,8 @@ Pane
 
     readonly property rect availableGeometry : Qt.rect(0, 0, width, height)
 
-    topPadding: Shell.cask ? Shell.cask.topPanel.height : 0
-    bottomPadding: Shell.formFactor === Cask.MauiMan.Desktop && Shell.dock ? Shell.dock.height : 0
+    topPadding: CaskShell.cask ? CaskShell.cask.topPanel.height : 0
+    bottomPadding: CaskShell.formFactor === Cask.MauiMan.Desktop && CaskShell.dock ? CaskShell.dock.height : 0
     leftPadding: 0
     rightPadding: 0
 
@@ -152,7 +152,7 @@ Pane
                 shellSurface: model.window.shellSurface
                 window: model.window
                 zpaceItem: control
-                scale: Shell.isMobile ? 1 : Shell.workspaces.scale
+                scale: CaskShell.isMobile ? 1 : CaskShell.workspaces.scale
 
 
                 moveItem: Item
@@ -188,8 +188,8 @@ Pane
             onTapped:
             {
 
-                Shell.workspaces.currentIndex = index
-                Shell.workspaces.closeOverview()
+                CaskShell.workspaces.currentIndex = index
+                CaskShell.workspaces.closeOverview()
             }
         }
 
