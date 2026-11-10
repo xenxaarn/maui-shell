@@ -122,7 +122,14 @@ Cask.StackableItem
     {
         id: surfaceItem
 
-        property bool valid: false
+        // WaylandSurface has no `size` property in Qt 6; the size the
+        // compositor uses is `destinationSize`. Keep this as a binding so it
+        // also updates when the client resizes, instead of only on width
+        // changes (the old handler threw a TypeError and left this false).
+        readonly property bool valid: surface !== null
+                                       && !surface.cursorSurface
+                                       && surface.destinationSize.width > 0
+                                       && surface.destinationSize.height > 0
         property bool isPopup: false
         property bool isTransient: false
 
@@ -176,11 +183,6 @@ Cask.StackableItem
                 property: "moving"
                 value: altDragHandler.active
             }
-        }
-
-        onWidthChanged:
-        {
-            valid =  !surface.cursorSurface && surface.size.width > 0 && surface.size.height > 0
         }
 
         // layer.enabled: rootChrome.decorationVisible

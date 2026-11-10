@@ -240,7 +240,17 @@ Pane
 
     function focusWindow(index)
     {
-        _content.children[index].window.activate()
+        // Called after a window is removed, so the requested index can point
+        // past the end (or the child may not be a window yet). Bail out
+        // instead of dereferencing undefined.
+        if (index < 0 || index >= _content.children.length)
+            return
+
+        const item = _content.children[index]
+        if (!item || !item.window)
+            return
+
+        item.window.activate()
     }
 
     function focusTopWindow(index = 0)
