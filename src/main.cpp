@@ -159,6 +159,9 @@ void qtMsgLog(QtMsgType type, const QMessageLogContext &context, const QString &
     }
     log.write(msg.toUtf8());
     log.write("\n");
+    // Flush every line so the log survives a crash or SIGTERM, where no
+    // destructor runs and the buffered tail would otherwise be lost.
+    log.flush();
     if (type == QtFatalMsg)
         abort();
 }
