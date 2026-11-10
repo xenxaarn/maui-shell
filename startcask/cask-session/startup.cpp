@@ -234,7 +234,20 @@ void Startup::finishStartup()
 
 
     playStartupSound(this);
-    new SessionTrack(m_processes);
+
+    // Track the actual cask process: when it exits the whole session must end.
+    QProcess *mainProcess = nullptr;
+    for (auto process : std::as_const(m_processes)) {
+        if (process->program() == QLatin1String("cask")) {
+            mainProcess = process;
+            break;
+        }
+    }
+    if (!mainProcess) {
+        qCWarning(CASK_SESSION) << "could not find the cask process to track";
+    }
+
+    new SessionTrack(m_processes, mainProcess);
     deleteLater();
 }
 
