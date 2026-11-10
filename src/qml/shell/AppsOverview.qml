@@ -32,7 +32,7 @@ Maui.Page
         saturation: -0.5
         blur: 1.0
         autoPaddingEnabled: true
-        source:  _cask.superOverlay
+        source:  Shell.cask ? Shell.cask.superOverlay : null
 
 
         Rectangle
@@ -51,7 +51,8 @@ Maui.Page
         onClicked:
         {
             control.close()
-            showDesktop = true
+            if(Shell.screen)
+                Shell.screen.showDesktop = true
         }
     }
 
@@ -66,7 +67,8 @@ Maui.Page
             text: qsTr("Clear all")
             onClicked:
             {
-                overView = false
+                if(Shell.screen)
+                    Shell.screen.overView = false
                 //                _listSurfaces.clear()
             }
         }
@@ -77,7 +79,8 @@ Maui.Page
             onClicked:
             {
                 control.close()
-                showDesktop = true
+                if(Shell.screen)
+                    Shell.screen.showDesktop = true
             }
         }
 
@@ -99,7 +102,7 @@ Maui.Page
         anchors.fill: parent
         contentWidth: availableWidth
         contentHeight: _overviewList.implicitHeight
-        contentX: _swipeView.contentX
+        contentX: Shell.workspaces ? Shell.workspaces.contentX : 0
         //        scale: control.initScale
         interactive: false
 
@@ -131,7 +134,7 @@ Maui.Page
             //        }
             Repeater
             {
-                model: _zpaces.allSurfaces
+                model: Shell.zpaces ? Shell.zpaces.allSurfaces : null
                 delegate: ItemDelegate
                 {
                     id: _itemDelegate
@@ -146,7 +149,8 @@ Maui.Page
                     onClicked:
                     {
                         control.close()
-                        _swipeView.currentIndex = _zpaces.indexOfZpace(xdgWindow)
+                        if(Shell.workspaces && Shell.zpaces)
+                            Shell.workspaces.currentIndex = Shell.zpaces.indexOfZpace(xdgWindow)
                         if(!xdgWindow.toplevel.activated)
                         {
                             xdgWindow.unminimize()//also activates it
