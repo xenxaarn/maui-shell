@@ -21,7 +21,8 @@ find_package(Qt6 ${REQUIRED_QT_VERSION} REQUIRED NO_MODULE COMPONENTS
 find_package(KF6 ${REQUIRED_KF_VERSION} REQUIRED COMPONENTS
     I18n
     Config
-    Service)
+    Service
+    CoreAddons)
 
 find_package(MauiMan4 REQUIRED)
 find_package(CaskServer REQUIRED)
@@ -136,6 +137,7 @@ target_link_libraries(${PROJECT_NAME}
     Qt6::QuickControls2
     Qt6::Svg
     KF6::Service
+    KF6::CoreAddons
     Qt6::WaylandCompositor
     Qt6::DBus
     KF6::I18n

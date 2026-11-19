@@ -20,6 +20,7 @@
 #pragma once
 
 #include <QObject>
+#include <QStandardPaths>
 
 #include <QString>
 #include <QStringList>
@@ -28,11 +29,10 @@
 
 #include <MauiKit4/Core/fmh.h>
 
-#include "fmstatic.h"
 
 namespace TAG
 {   
-    static const QString TaggingPath = FMStatic::DataPath + QStringLiteral("/maui/cask/");
+    static const QString TaggingPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QStringLiteral("/maui/cask/");
     static const QString DBName = QStringLiteral("apps-v1.db");
 }
 
