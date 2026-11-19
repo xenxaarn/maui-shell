@@ -43,7 +43,6 @@
 #include <unistd.h>
 
 #include <MauiKit4/Core/mauiapp.h>
-#include <MauiKit4/Calendar/moduleinfo.h>
 
 #include <KLocalizedString>
 
@@ -241,8 +240,6 @@ int main(int argc, char *argv[])
     about.setOrganizationDomain(CASK_URI);
     about.setProgramLogo(app.windowIcon());
 
-    const auto FBData = MauiKitCalendar::aboutData();
-    about.addComponent(FBData.name(), MauiKitCalendar::buildVersion(), FBData.version(), FBData.webAddress());
 
     KAboutData::setApplicationData(about);
 

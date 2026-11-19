@@ -29,7 +29,6 @@ find_package(KF6 ${REQUIRED_KF5_VERSION} REQUIRED COMPONENTS
     
 find_package(CaskServer)
 find_package(MauiCore REQUIRED COMPONENTS Audio Notifications Power)
-find_package(MauiKit4 REQUIRED COMPONENTS FileBrowsing)
 
 find_package(MauiMan4 REQUIRED)
 set_package_properties(MauiMan${MAUI_MAJOR_VERSION} PROPERTIES

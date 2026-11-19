@@ -6,7 +6,6 @@ import QtQuick.Controls
 import org.mauikit.controls as Maui
 import org.maui.cask as Cask
 
-import "items/calendar"
 import "items/player"
 import "items/sliders"
 import "items/toggles"
@@ -166,9 +165,6 @@ Control
             {
             }
 
-            CalendarItem
-            {
-            }
         }
 
         Cask.PanelSection

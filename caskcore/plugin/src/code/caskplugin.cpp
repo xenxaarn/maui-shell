@@ -2,7 +2,6 @@
 #include "stackableitem.h"
 #include "enviroment.h"
 #include "models/appsmodel.h"
-#include "models/recentfilesmodel.h"
 
 #include "processlauncher.h"
 
@@ -46,7 +45,6 @@ void CaskCorePlugin::registerTypes(const char *uri)
     qmlRegisterType<WaylandProcessLauncher>(uri, 1, 0, "ProcessLauncher");
 
     qmlRegisterType<AppsModel>(uri, 1, 0, "AppsModel");
-    qmlRegisterType<RecentFilesModel>(uri, 1, 0, "RecentFiles");
     qmlRegisterType<AppsDB>(uri, 1, 0, "AppsDB");
 
     //mpris stuff

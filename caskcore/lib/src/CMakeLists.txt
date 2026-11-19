@@ -27,7 +27,6 @@ target_sources(${PROJECT_NAME}
     
     code/caskplugin.cpp
     code/models/appsmodel.cpp
-    code/models/recentfilesmodel.cpp
     code/models/recentappsmodel.cpp
     code/stackableitem.cpp
     code/enviroment.cpp
@@ -40,7 +39,6 @@ target_sources(${PROJECT_NAME}
     
     code/caskplugin.h
     code/models/appsmodel.h
-    code/models/recentfilesmodel.h
     code/models/recentappsmodel.h
     code/stackableitem.h
     code/enviroment.h
@@ -117,7 +115,6 @@ target_link_libraries(${PROJECT_NAME}
     MauiCore::Audio
     MauiCore::Notifications
     MauiKit4
-    MauiKit4::FileBrowsing
     KF6::I18n
     KF6::Service
     KF6::ConfigCore

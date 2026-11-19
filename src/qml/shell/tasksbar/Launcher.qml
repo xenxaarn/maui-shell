@@ -3,7 +3,6 @@ import QtQuick.Layouts
 import QtQuick.Controls
 
 import org.mauikit.controls as Maui
-import org.mauikit.filebrowsing as FB
 
 import org.maui.cask as Cask
 
