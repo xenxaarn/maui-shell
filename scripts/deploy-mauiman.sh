@@ -1,3 +1,5 @@
 #!/usr/bin/env bash
-source "$(dirname "${BASH_SOURCE}")/_common.sh"
-build_component mauiman https://kde.org "${BRANCH_MAUIMAN:-master}" -DBUNDLE_MAUI_STYLE=ON
+source "$(dirname "${BASH_SOURCE[0]}")/_common.sh"
+build_component mauiman https://invent.kde.org/maui/mauiman.git "${BRANCH_MAUIMAN:-master}" -DBUNDLE_MAUI_STYLE=ON
+
+$SUDO rm -f "$PREFIX"/share/dbus-1/services/org.mauiman.Manager[0-9]*.service
